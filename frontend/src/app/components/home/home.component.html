@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="card" style="margin-top: 50px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+      <h1>Dashboard</h1>
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+
+    <div *ngIf="currentUser" style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+      <h2 style="font-size: 20px; margin-bottom: 15px;">User Information</h2>
+      <div style="display: grid; gap: 10px;">
+        <div style="display: flex;">
+          <strong style="width: 120px;">Name:</strong>
+          <span>{{ currentUser.name }}</span>
+        </div>
+        <div style="display: flex;">
+          <strong style="width: 120px;">Email:</strong>
+          <span>{{ currentUser.email }}</span>
+        </div>
+        <div style="display: flex;">
+          <strong style="width: 120px;">User ID:</strong>
+          <span style="font-family: monospace; font-size: 12px;">{{ currentUser.id }}</span>
+        </div>
+        <div style="display: flex;">
+          <strong style="width: 120px;">Provider:</strong>
+          <span style="display: inline-flex; align-items: center; gap: 5px;">
+            {{ getProviderDisplayName() }}
+            <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              {{ currentUser.provider }}
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid #e5e7eb; padding-top: 30px;">
+      <h2 style="font-size: 20px; margin-bottom: 15px;">API Connection Test</h2>
+      <p style="color: #6b7280; margin-bottom: 20px;">
+        Test the connection to your .NET API backend to verify token validation
+      </p>
+
+      <button
+        class="btn btn-primary"
+        (click)="testApiConnection()"
+        [disabled]="loading">
+        {{ loading ? 'Testing...' : 'Test API Connection' }}
+      </button>
+
+      <div *ngIf="error" style="background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 6px; margin-top: 15px;">
+        {{ error }}
+      </div>
+
+      <div *ngIf="apiResponse" style="background: #d1fae5; color: #065f46; padding: 12px; border-radius: 6px; margin-top: 15px;">
+        <strong>Success!</strong> API validated your token
+        <pre style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px; overflow-x: auto; color: #333;">{{ apiResponse | json }}</pre>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
+      <h3 style="font-size: 18px; margin-bottom: 10px;">Features</h3>
+      <ul style="color: #6b7280; line-height: 1.8;">
+        <li>Multi-provider SSO authentication (Azure AD, Okta, Auth0)</li>
+        <li>Secure JWT token validation via .NET API</li>
+        <li>Protected routes with auth guards</li>
+        <li>Automatic token refresh and management</li>
+        <li>HTTP interceptor for API authentication</li>
+      </ul>
+    </div>
+  </div>
+</div>
