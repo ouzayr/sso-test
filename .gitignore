@@ -1,0 +1,30 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/src/environments/environment.ts
+frontend/src/environments/environment.prod.ts
+
+# Backend
+backend/bin/
+backend/obj/
+backend/appsettings.Development.json
+backend/appsettings.Production.json
+backend/appsettings.Local.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
