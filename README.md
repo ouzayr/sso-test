@@ -2,6 +2,13 @@
 
 A complete Single Sign-On (SSO) solution with Angular frontend and .NET API backend, supporting **Azure AD**, **Okta**, and **Auth0** authentication providers.
 
+## 📚 Documentation
+
+- **[Setup Guide](SETUP_GUIDE.md)** - Step-by-step setup instructions for beginners
+- **[Technical Guide](TECHNICAL_GUIDE.md)** - In-depth technical documentation and architecture
+- **[Component Reference](COMPONENT_REFERENCE.md)** - Complete listing of all components and files
+- **README** (this file) - Quick start and overview
+
 ## Features
 
 ### Frontend (Angular)
