@@ -5,11 +5,16 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // Auth0 redirects to root with query params, so we need to handle it
+  {
+    path: '',
+    component: LoginComponent,
+    // This will show login page OR handle callback if query params present
+  },
   { path: 'login', component: LoginComponent },
   { path: 'login/callback', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

@@ -21,25 +21,37 @@ export class LoginComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/home']);
-      return;
-    }
+    console.log('Login component initialized');
+    console.log('Current URL:', window.location.href);
+    console.log('Is authenticated:', this.authService.isAuthenticated());
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 
-    if (window.location.pathname.includes('callback') ||
-        window.location.search.includes('code=') ||
-        window.location.hash.includes('access_token')) {
+    // Check if this is an OAuth callback (code in URL or hash)
+    const hasCallback = window.location.pathname.includes('callback') ||
+                       window.location.search.includes('code=') ||
+                       window.location.search.includes('state=') ||
+                       window.location.hash.includes('access_token');
+
+    console.log('Has callback params:', hasCallback);
+
+    if (hasCallback) {
+      // Handle OAuth callback
       this.loading = true;
       try {
+        console.log('Handling OAuth callback...');
         await this.authService.handleCallback();
+        console.log('Callback handled successfully');
+        // Navigation will happen in auth service
       } catch (error: any) {
-        this.error = 'Authentication failed. Please try again.';
+        this.error = 'Authentication failed: ' + (error.message || 'Please try again.');
         console.error('Login callback error:', error);
-      } finally {
         this.loading = false;
       }
+    } else if (this.authService.isAuthenticated()) {
+      // User already authenticated, redirect to home
+      console.log('User already authenticated, redirecting to home');
+      this.router.navigate(['/home']);
     }
   }
 
